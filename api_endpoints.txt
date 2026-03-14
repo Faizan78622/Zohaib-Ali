@@ -1,0 +1,7 @@
+# API Endpoints & Workers.dev URLs Found
+
+## Regular API Endpoints:
+
+https://fonts.googleapis.com/css2
+  +2?family=Orbitron:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;600;700&display=swap
+

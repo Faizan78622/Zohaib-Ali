@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mohamed Abdelrazek - Performance Marketing Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2
+  +2?family=Orbitron:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Replace with the exact background image URL from your original code */
+      --bg-image: url("YOUR_ORIGINAL_BACKGROUND_IMAGE_URL_HERE");
+
+      /* Brighter professional tech + gold accent */
+      --bg0:#070b12;
+      --panel1:rgba(18,24,34,.66);
+      --panel2:rgba(18,24,34,.42);
+
+      --gold:#ffd36a;
+      --gold2:#d7b54a;
+      --cyan:#7ff0ff;
+
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.12);
+
+      --r-xl:28px;
+      --r-lg:20px;
+      --r-md:14px;
+      --pill:999px;
+
+      --max:1500px;
+
+      --cx: 52vw;
+      --cy: 22vh;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg0); color:var(--text); scroll-behavior:smooth; overflow-x:hidden; }
+    body{ font-family:Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif; line-height:1.7; }
+
+    /* Background image */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:var(--bg-image);
+      background-size:cover;
+      background-position:center;
+      filter: blur(2px);
+      transform: scale(1.03);
+      z-index:-4;
+    }
+
+    /* Brighter overlay + mouse glow */
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(980px circle at var(--cx) var(--cy), rgba(255,211,106,.28), transparent 58%),
+        radial-gradient(1150px circle at 78% 12%, rgba(255,211,106,.16), transparent 62%),
+        radial-gradient(980px circle at 20% 80%, rgba(127,240,255,.14), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.66));
+      z-index:-3;
+      pointer-events:none;
+    }
+
+    /* Subtle HUD grid */
+    .hud{
+      position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.18;
+      background: radial-gradient(circle at 1px 1px, rgba(255,211,106,.20) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mix-blend-mode: screen;
+    }
+
+    /* Layout */
+    .shell{
+      width:min(95vw, var(--max));
+      margin: 18px auto 88px;
+      padding: 0 18px;
+    }
+
+    /* Nav */
+    .nav{ position:sticky; top:14px; z-index:50; margin-bottom:18px; }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding: 10px 16px;
+      border-radius: var(--pill);
+      border: 1px solid transparent;
+      background:
+        radial-gradient(900px circle at 15% 0%, rgba(255,211,106,.16), transparent 60%) padding-box,
+        linear-gradient(180deg, rgba(18,24,34,.74), rgba(18,24,34,.44)) padding-box,
+        linear-gradient(135deg, rgba(255,211,106,.58), rgba(127,240,255,.18), rgba(255,211,106,.36)) border-box;
+      backdrop-filter: blur(14px);
+    }
+    .brand{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.90);
+      white-space:nowrap;
+    }
+    .links{ display:flex; flex-wrap:wrap; gap:10px; font-size:13px; }
+    .link{
+      color: rgba(255,255,255,.84);
+      text-decoration:none;
+      padding: 7px 12px;
+      border-radius: var(--pill);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .link:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,211,106,.55);
+      background: rgba(255,211,106,.10);
+    }
+
+    /* Surfaces (0 shadows) */
+    .surface{
+      border-radius: var(--r-xl);
+      border: 1px solid transparent;
+      background:
+        radial-gradient(900px circle at var(--mx) var(--my), rgba(255,211,106,.12), transparent 60%) padding-box,
+        linear-gradient(180deg, var(--panel1), var(--panel2)) padding-box,
+        linear-gradient(135deg, rgba(255,211,106,.58), rgba(127,240,255,.16), rgba(255,211,106,.34)) border-box;
+      backdrop-filter: blur(12px);
+      position:relative;
+      overflow:hidden;
+    }
+    .surface::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px circle at 0 0, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(900px circle at 110% 120%, rgba(255,211,106,.12), transparent 62%);
+      mix-blend-mode: screen;
+      opacity:.9;
+      pointer-events:none;
+    }
+    .surface > *{ position:relative; z-index:1; }
+
+    /* Section header */
+    .section{ margin-top: 18px; }
+    .section .head{ text-align:center; padding: 26px 18px 16px; }
+    .kicker{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.26em;
+      text-transform:uppercase;
+      color: rgba(255,211,106,.96);
+      margin-bottom: 8px;
+    }
+    h2{
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-size: 34px;
+      margin: 0 0 10px;
+      color: rgba(255,255,255,.97);
+    }
+    .sub{
+      max-width: 980px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 12px;
+    }
+
+    /* Hero */
+    .hero{
+      padding: 28px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items:stretch;
+    }
+    .hero-title{
+      font-family:"Playfair Display", serif;
+      font-style: italic;
+      font-size: 44px;
+      margin: 0 0 10px;
+      color: rgba(255,255,255,.98);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .hero-line{
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.84);
+      font-size: 18px;
+      max-width: 840px;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .mini{
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      padding: 12px 12px;
+    }
+    .mini .t{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(255,211,106,.96);
+      margin-bottom: 8px;
+    }
+    .mini ul{
+      margin:0;
+      padding-left: 16px;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+    }
+    .mini li{ margin: 7px 0; }
+
+    .cta-row{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 16px; }
+
+    .btn{
+      border-radius: var(--pill);
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      color: rgba(18,24,34,.92);
+      font-weight: 900;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      background:
+        radial-gradient(520px circle at var(--mx) var(--my), rgba(255,255,255,.65), transparent 60%) padding-box,
+        linear-gradient(135deg, rgba(255,211,106,.98), rgba(215,181,74,.82)) padding-box;
+      transition: transform .18s ease, filter .18s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter: brightness(1.04); }
+
+    .btn-ghost{
+      border-radius: var(--pill);
+      padding: 10px 18px;
+      border: 1px solid rgba(255,211,106,.44);
+      color: rgba(255,255,255,.88);
+      font-weight: 900;
+      text-decoration:none;
+      background: rgba(255,255,255,.04);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn-ghost:hover{
+      transform: translateY(-2px);
+      background: rgba(255,211,106,.10);
+      border-color: rgba(255,211,106,.62);
+    }
+
+    /* Profile */
+    .profile{ padding: 18px; display:flex; flex-direction:column; gap: 12px; justify-content:space-between; }
+    .pf-top{ display:flex; gap: 12px; align-items:center; }
+    .avatar{
+      width: 76px; height: 76px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,211,106,.55);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,.14), transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(255,211,106,.18), transparent 60%);
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .pf-name{
+      margin:0;
+      font-family:"Playfair Display", serif;
+      font-style: italic;
+      font-size: 20px;
+      color: rgba(255,255,255,.96);
+    }
+    .pf-loc{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.64);
+      margin-top: 4px;
+    }
+
+    .chips{ display:flex; flex-wrap:wrap; gap: 8px; }
+    .chip{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: var(--pill);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.80);
+      white-space:nowrap;
+    }
+
+    .contact{
+      font-size: 14px;
+      color: rgba(255,255,255,.78);
+      line-height:1.65;
+    }
+    .contact a{
+      color: rgba(255,211,106,.96);
+      text-decoration:none;
+      border-bottom: 1px solid transparent;
+    }
+    .contact a:hover{ border-bottom-color: rgba(255,211,106,.60); }
+
+    /* Grids */
+    .grid{ padding: 0 18px 22px; }
+
+    /* Services */
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .tile{
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      padding: 14px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .tile::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(900px circle at var(--mx) var(--my), rgba(255,211,106,.16), transparent 58%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .tile > *{ position:relative; z-index:1; }
+
+    .tile-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom: 10px; }
+    .step{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color: rgba(255,211,106,.96);
+    }
+    .tag{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      padding: 6px 10px;
+      border-radius: var(--pill);
+      border: 1px solid rgba(255,211,106,.28);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.74);
+      white-space:nowrap;
+    }
+    .tile h3{
+      margin:0 0 8px;
+      font-family:"Playfair Display", serif;
+      font-style: italic;
+      font-size: 18px;
+      color: rgba(255,255,255,.96);
+    }
+    .tile p{
+      margin:0 0 10px;
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+    }
+    .tile ul{
+      margin:0;
+      padding-left: 16px;
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+    }
+    .tile li{ margin: 7px 0; }
+
+    /* Work */
+    .work{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .work-card{
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .work-card::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(900px circle at var(--mx) var(--my), rgba(255,211,106,.14), transparent 58%);
+      pointer-events:none;
+    }
+    .work-card > *{ position:relative; z-index:1; }
+
+    .wk-kicker{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color: rgba(127,240,255,.76);
+      margin-bottom: 6px;
+    }
+    .wk-title{
+      font-family:"Playfair Display", serif;
+      font-style: italic;
+      font-size: 22px;
+      margin:0 0 8px;
+      color: rgba(255,255,255,.96);
+    }
+    .wk-body{
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+      margin:0 0 12px;
+    }
+
+    /* Process */
+    .flow{
+      margin-top: 12px;
+      display:flex;
+      gap: 14px;
+      padding: 10px 6px 20px;
+      overflow-x:auto;
+      scroll-snap-type: x mandatory;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .flow::-webkit-scrollbar{ height: 10px; }
+    .flow::-webkit-scrollbar-thumb{ background: rgba(255,211,106,.22); border-radius: 999px; }
+    .flow::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); border-radius: 999px; }
+
+    .stage{
+      scroll-snap-align:start;
+      min-width: 360px;
+      max-width: 360px;
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      padding: 16px 16px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .stage::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(900px circle at var(--mx) var(--my), rgba(255,211,106,.16), transparent 58%);
+      pointer-events:none;
+    }
+    .stage > *{ position:relative; z-index:1; }
+
+    .stage-head{ display:flex; align-items:center; gap: 12px; margin-bottom: 10px; }
+
+    .accent{
+      width: 46px; height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,211,106,.46);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,.22), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255,211,106,.96), rgba(215,181,74,.58) 48%, transparent 72%),
+        conic-gradient(from 220deg, rgba(127,240,255,.20), rgba(255,211,106,.78), rgba(127,240,255,.20));
+      animation: pulse 2.8s ease-in-out infinite;
+      position:relative;
+    }
+    .accent::after{
+      content:"";
+      position:absolute;
+      inset: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,211,106,.30);
+      background: radial-gradient(circle at 60% 40%, rgba(127,240,255,.14), transparent 60%);
+      animation: spin 6.2s linear infinite;
+      opacity:.95;
+    }
+    @keyframes pulse{ 0%{transform:scale(1)} 50%{transform:scale(1.08)} 100%{transform:scale(1)} }
+    @keyframes spin{ 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+
+    .sid{
+      font-family: Orbitron, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color: rgba(255,211,106,.96);
+      margin-bottom: 2px;
+    }
+    .sname{
+      font-family:"Playfair Display", serif;
+      font-style: italic;
+      font-size: 18px;
+      color: rgba(255,255,255,.96);
+      margin:0;
+    }
+    .stage p{ margin:0 0 10px; color: rgba(255,255,255,.76); font-size:14px; }
+    .stage ul{ margin:0; padding-left:16px; color: rgba(255,255,255,.76); font-size:14px; }
+    .stage li{ margin:7px 0; }
+
+    /* Reveal */
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.in{ opacity:1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .hero{ grid-template-columns: 1fr; }
+      .hero-points{ grid-template-columns: 1fr; }
+      .services{ grid-template-columns: 1fr; }
+      .work{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px){
+      .shell{ padding: 0 12px; }
+      .nav-inner{ flex-direction: column; align-items:flex-start; }
+      .hero{ padding: 20px; }
+      .stage{ min-width: 84vw; max-width: 84vw; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hud" aria-hidden="true"></div>
+
+  <div class="shell">
+    <!-- NAV -->
+    <div class="nav">
+      <div class="nav-inner surface reveal">
+        <div class="brand">Performance Marketing Portfolio</div>
+        <div class="links">
+          <a class="link" href="#services">Services</a>
+          <a class="link" href="#work">Work</a>
+          <a class="link" href="#process">Process</a>
+          <a class="link" href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="surface hero reveal" id="top">
+      <div>
+        <div class="kicker">END TO END MARKETING SYSTEMS</div>
+        <h1 class="hero-title">Mohamed Abdelrazek</h1>
+        <p class="hero-line">
+          I build one connected engine: market research, content creation, acquisition, SEO, tracking, conversion, stabilization, and monitoring.
+          Clear structure, fast decisions, and measurable outcomes.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn" href="#work">View case studies</a>
+          <a class="btn-ghost" href="#services">See services</a>
+          <a class="btn-ghost" href="#process">View process</a>
+        </div>
+
+        <div class="hero-points">
+          <div class="mini">
+            <div class="t">What I deliver</div>
+            <ul>
+              <li>Landing page map tied to intent</li>
+              <li>Tracking plan and dashboards</li>
+              <li>Acquisition architecture built for scale</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <div class="t">How I protect performance</div>
+            <ul>
+              <li>Conversion integrity validation</li>
+              <li>Weekly monitoring rhythm</li>
+              <li>Documented scale and stop rules</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <aside class="surface profile">
+        <div class="pf-top">
+          <div class="avatar">
+            <img src="profile.jpg" alt="Portrait of Mohamed Abdelrazek">
+          </div>
+          <div>
+            <p class="pf-name">Mohamed Abdelrazek</p>
+            <div class="pf-loc">Alexandria, Egypt</div>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span class="chip">Google Ads</span>
+          <span class="chip">GA4</span>
+          <span class="chip">GTM</span>
+          <span class="chip">Shopify</span>
+          <span class="chip">SEO</span>
+          <span class="chip">Dashboards</span>
+        </div>
+
+        <div class="contact">
+          <div><strong>Email</strong>: <a href="mailto:moe-abdelrazek@outlook.com">moe-abdelrazek@outlook.com</a></div>
+          <div><strong>WhatsApp</strong>: <a href="https://wa.me/201017286384" target="_blank" rel="noopener">+20 101 728 6384</a></div>
+          <div><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/moe-abdelrazek/" target="_blank" rel="noopener">linkedin.com/in/moe-abdelrazek</a></div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#contact">Discuss a project</a>
+          <a class="btn-ghost" href="resume.html">Open resume</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section surface reveal" id="services">
+      <div class="head">
+        <div class="kicker">SERVICES</div>
+        <h2>End to end, measurable delivery</h2>
+        <div class="sub">Clean scope, clear outputs, and a stable operating model. Content creation is a core layer.</div>
+      </div>
+
+      <div class="grid">
+        <div class="services">
+          <div class="tile">
+            <div class="tile-top"><div class="step">01</div><div class="tag">Research</div></div>
+            <h3>Market and competitor research</h3>
+            <p>Demand, positioning signals, and conversion friction.</p>
+            <ul>
+              <li>Intent mapping</li>
+              <li>Competitor offers and objections</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <div class="tile-top"><div class="step">02</div><div class="tag">Strategy</div></div>
+            <h3>Funnel and landing pages</h3>
+            <p>Message match from query to page to action.</p>
+            <ul>
+              <li>Offer structure</li>
+              <li>Landing page plan</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <div class="tile-top"><div class="step">03</div><div class="tag">Tracking</div></div>
+            <h3>Measurement and dashboards</h3>
+            <p>Events, goals, UTMs, validation, reporting.</p>
+            <ul>
+              <li>GA4 and GTM setup</li>
+              <li>Decision dashboards</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <div class="tile-top"><div class="step">04</div><div class="tag">Content</div></div>
+            <h3>Content creation system</h3>
+            <p>Creative tied to demand and objections, with a refresh cadence.</p>
+            <ul>
+              <li>Hooks and angles library</li>
+              <li>Creative refresh plan</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <div class="tile-top"><div class="step">05</div><div class="tag">Acquisition</div></div>
+            <h3>Paid acquisition</h3>
+            <p>Search, Shopping, Performance Max structure built for control.</p>
+            <ul>
+              <li>Campaign architecture</li>
+              <li>Query control rules</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <div class="tile-top"><div class="step">06</div><div class="tag">Monitoring</div></div>
+            <h3>Stabilize and monitor</h3>
+            <p>Guardrails, weekly rhythm, scale and stop rules.</p>
+            <ul>
+              <li>Integrity checks</li>
+              <li>Iteration loop</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="section surface reveal" id="work">
+      <div class="head">
+        <div class="kicker">SELECTED WORK</div>
+        <h2>Case studies</h2>
+        <div class="sub">Short, practical, and built as systems. Click to open.</div>
+      </div>
+
+      <div class="grid">
+        <div class="work">
+          <div class="work-card">
+            <div class="wk-kicker">Ecommerce hardware | UAE</div>
+            <div class="wk-title">TechnoMounts</div>
+            <div class="wk-body">Performance-ready structure: pages, tracking, SEO baseline, and acquisition prep.</div>
+            <a class="btn" href="https://moeabdelrazek.github.io/TechnoMounts/" target="_blank" rel="noopener">Open case study</a>
+          </div>
+
+          <div class="work-card">
+            <div class="wk-kicker">Hospitality | Loyalty economics</div>
+            <div class="wk-title">Haksoss Cafe</div>
+            <div class="wk-body">Launch and repeat behavior system focused on measurable retention drivers.</div>
+            <a class="btn" href="https://moeabdelrazek.github.io/Haksoss_Full_Campaign/" target="_blank" rel="noopener">Open case study</a>
+          </div>
+
+          <div class="work-card">
+            <div class="wk-kicker">Healthcare | Appointments</div>
+            <div class="wk-title">Rafiki Pet Hospital</div>
+            <div class="wk-body">Conversion path designed around booked outcomes and operational follow-through.</div>
+            <a class="btn" href="https://moeabdelrazek.github.io/Rafiki-Campaign/" target="_blank" rel="noopener">Open case study</a>
+          </div>
+
+          <div class="work-card">
+            <div class="wk-kicker">Fitness | Membership</div>
+            <div class="wk-title">Mory Gym</div>
+            <div class="wk-body">Direct-response acquisition with clear offer structure and follow-up rhythm.</div>
+            <a class="btn" href="https://moeabdelrazek.github.io/mory-gym-campaign/" target="_blank" rel="noopener">Open case study</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section surface reveal" id="process">
+      <div class="head">
+        <div class="kicker">PROCESS</div>
+        <h2>How I build and run the system</h2>
+        <div class="sub">A clear sequence from evidence to stable performance. Scroll horizontally.</div>
+      </div>
+
+      <div class="grid">
+        <div class="flow">
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 01</div>
+                <p class="sname">Evidence and baseline</p>
+              </div>
+            </div>
+            <p>Decide what matters before building.</p>
+            <ul>
+              <li>Demand and intent mapping</li>
+              <li>Competitor offers and objections</li>
+            </ul>
+          </div>
+
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 02</div>
+                <p class="sname">Positioning and offer</p>
+              </div>
+            </div>
+            <p>Translate evidence into a clear stance.</p>
+            <ul>
+              <li>Primary segment and exclusions</li>
+              <li>Offer structure and proof plan</li>
+            </ul>
+          </div>
+
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 03</div>
+                <p class="sname">Tracking and reporting</p>
+              </div>
+            </div>
+            <p>Make performance readable and trusted.</p>
+            <ul>
+              <li>GA4, GTM, conversions</li>
+              <li>Dashboards for decisions</li>
+            </ul>
+          </div>
+
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 04</div>
+                <p class="sname">Content and creative</p>
+              </div>
+            </div>
+            <p>Build a repeatable content engine.</p>
+            <ul>
+              <li>Hooks, angles, proof assets</li>
+              <li>Refresh cadence</li>
+            </ul>
+          </div>
+
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 05</div>
+                <p class="sname">Acquisition build and launch</p>
+              </div>
+            </div>
+            <p>Deploy controlled campaigns built to scale.</p>
+            <ul>
+              <li>Search and Shopping structure</li>
+              <li>Budget and query guardrails</li>
+            </ul>
+          </div>
+
+          <div class="stage">
+            <div class="stage-head">
+              <div class="accent" aria-hidden="true"></div>
+              <div>
+                <div class="sid">Step 06</div>
+                <p class="sname">Stabilization and monitoring</p>
+              </div>
+            </div>
+            <p>Protect performance and iterate.</p>
+            <ul>
+              <li>Weekly monitoring rhythm</li>
+              <li>Scale and stop rules</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section surface reveal" id="contact">
+      <div class="head">
+        <div class="kicker">CONTACT</div>
+        <h2>Let’s discuss your project</h2>
+        <div class="sub">Share your market, offer, and main conversion action. I will reply with a clear build plan.</div>
+
+        <div class="cta-row" style="justify-content:center; margin-top:14px;">
+          <a class="btn" href="mailto:moe-abdelrazek@outlook.com">Email</a>
+          <a class="btn-ghost" href="https://wa.me/201017286384" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn-ghost" href="https://www.linkedin.com/in/moe-abdelrazek/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function(){
+      // Mouse glow
+      document.addEventListener("mousemove", function(e){
+        document.documentElement.style.setProperty("--cx", e.clientX + "px");
+        document.documentElement.style.setProperty("--cy", e.clientY + "px");
+      });
+
+      // Local glow on hover for surfaces and cards
+      function bindGlow(sel){
+        document.querySelectorAll(sel).forEach(function(el){
+          el.addEventListener("mousemove", function(e){
+            const r = el.getBoundingClientRect();
+            el.style.setProperty("--mx", (e.clientX - r.left) + "px");
+            el.style.setProperty("--my", (e.clientY - r.top) + "px");
+          });
+        });
+      }
+      bindGlow(".surface, .tile, .work-card, .stage, .btn, .btn-ghost, .nav-inner");
+
+      // Reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach((en)=>{
+          if(en.isIntersecting){ en.target.classList.add("in"); }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
